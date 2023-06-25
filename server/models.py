@@ -52,14 +52,14 @@ class Post(db.Model):
             return address
             
         elif key == "category":
-            if address != "Non-Fiction":
+            if address != "Non-Fiction" and address != "Fiction":
                 raise ValueError("Category should either be 'Fiction' or 'Non-Fiction'")
             return address
         
-        # elif key == "title":
-        #     if len(address) < 1:
-        #         raise ValueError('Title must be included')
-        #     return address
+        elif key == "title":
+            if len(address) < 1 or (("Won't Beleive" not in address) and ("Secret" not in address) and ("Top" not in address) and ("Guess") not in address):
+                raise ValueError('Title must be included')
+            return address
 
     def __repr__(self):
         return f'Post(id={self.id}, title={self.title} content={self.content}, summary={self.summary})'
